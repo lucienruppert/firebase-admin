@@ -6,8 +6,7 @@ export class UsersController {
   constructor(private usersService: UsersService) {}
 
   @Get()
-  getUsers() {
-    console.log('salala');
+  public getUsers(): Promise<string[]> {
     return this.usersService.getUserEmails();
   }
 }

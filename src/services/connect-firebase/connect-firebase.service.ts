@@ -11,7 +11,7 @@ export class ConnectFirebaseService {
     admin.initializeApp({
       credential: admin.credential.cert({
         projectId: process.env.PROJECT_ID,
-        privateKey: process.env.PRIVATE_KEY.replace(/\\n/gm, '\n'),
+        privateKey: process.env.PRIVATE_KEY!.replace(/\\n/gm, '\n'),
         clientEmail: process.env.CLIENT_EMAIL,
       }),
     } as admin.ServiceAccount);
@@ -22,7 +22,8 @@ export class ConnectFirebaseService {
     try {
       const userData = await this.firebase.auth().listUsers();
       const userArray = userData.users;
-      const users = userArray.map((user) => user.email);
+      // At the moment only email-password based registration is used
+      const users = userArray.map((user) => user.email!);
       return users;
     } catch (error) {
       return [];
