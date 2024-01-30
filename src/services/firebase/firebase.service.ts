@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Module } from '@nestjs/common';
 import * as admin from 'firebase-admin';
 import * as dotenv from 'dotenv';
 
@@ -30,3 +30,9 @@ export class FirebaseService {
     }
   }
 }
+
+@Module({
+  providers: [FirebaseService],
+  exports: [FirebaseService],
+})
+export class FirebaseModule {}
