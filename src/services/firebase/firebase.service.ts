@@ -3,7 +3,7 @@ import * as admin from 'firebase-admin';
 import * as dotenv from 'dotenv';
 
 @Injectable()
-export class ConnectFirebaseService {
+export class FirebaseService {
   private readonly firebase: admin.app.App;
 
   constructor() {
