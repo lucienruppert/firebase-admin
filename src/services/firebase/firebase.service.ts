@@ -26,7 +26,7 @@ export class FirebaseService {
       const users = userArray.map((user) => user.email!);
       return users;
     } catch (error) {
-      return [];
+      throw new Error('Failed to retrieve users: ' + error);
     }
   }
 }
