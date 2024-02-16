@@ -1,6 +1,7 @@
 import { Injectable, Module } from '@nestjs/common';
 import * as admin from 'firebase-admin';
 import * as dotenv from 'dotenv';
+import { UserRecord } from 'firebase-admin/lib/auth/user-record';
 
 @Injectable()
 export class FirebaseService {
@@ -25,6 +26,17 @@ export class FirebaseService {
       // At the moment only email-password based registration is used
       const users = userArray.map((user) => user.email!);
       return users;
+    } catch (error) {
+      throw new Error('Failed to retrieve users: ' + error);
+    }
+  }
+
+  public async getUserByEmail(email: string): Promise<UserRecord> {
+    try {
+      const userData: UserRecord = await this.firebase
+        .auth()
+        .getUserByEmail(email);
+      return userData;
     } catch (error) {
       throw new Error('Failed to retrieve users: ' + error);
     }
