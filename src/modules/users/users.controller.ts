@@ -12,7 +12,7 @@ export class UsersController {
   }
 
   @Post()
-  public getUsersByEmail(@Body('email') email: string): Promise<UserRecord> {
+  public getUserByEmail(@Body('email') email: string): Promise<UserRecord> {
     return this.usersService.getUserByEmailByBody(email);
   }
 }
