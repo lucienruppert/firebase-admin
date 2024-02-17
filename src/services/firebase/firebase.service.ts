@@ -2,6 +2,8 @@ import { Injectable, Module } from '@nestjs/common';
 import * as admin from 'firebase-admin';
 import * as dotenv from 'dotenv';
 import { UserRecord } from 'firebase-admin/lib/auth/user-record';
+import { GetUsersResult } from 'firebase-admin/lib/auth/base-auth';
+import { UserIdentifier } from 'firebase-admin/lib/auth/identifier';
 
 @Injectable()
 export class FirebaseService {
@@ -39,6 +41,18 @@ export class FirebaseService {
       return userData;
     } catch (error) {
       throw new Error('Failed to retrieve users: ' + error);
+    }
+  }
+
+  // eslint-disable-next-line prettier/prettier
+  public async getUsersByEmail(userEmails: Array<UserIdentifier>): Promise<GetUsersResult> {
+    try {
+      const usersData: GetUsersResult = await this.firebase
+        .auth()
+        .getUsers(userEmails);
+      return usersData;
+    } catch (error) {
+      throw new Error('Failed to retrieve users data: ' + error);
     }
   }
 }
