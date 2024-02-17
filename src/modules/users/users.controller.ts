@@ -14,13 +14,13 @@ export class UsersController {
   }
 
   @Post()
-  public getUserByEmail(@Body('email') email: string): Promise<UserRecord> {
+  public getUserByEmail(@Body('one') email: string): Promise<UserRecord> {
     return this.usersService.getUserByEmailByBody(email);
   }
 
   @Post()
   public getUsersByEmail(
-    @Body('email') userEmails: Array<UserIdentifier>,
+    @Body('many') userEmails: Array<UserIdentifier>,
   ): Promise<GetUsersResult> {
     return this.usersService.getUsersByEmailByBody(userEmails);
   }
