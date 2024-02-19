@@ -35,7 +35,7 @@ export class UsersService {
     }
   }
 
-  public async createUsers(userData: CreateRequest): Promise<UserRecord> {
+  public async createUser(userData: CreateRequest): Promise<UserRecord> {
     try {
       const userRecords = await this.firebase.auth().createUser(userData);
       return userRecords;

@@ -23,10 +23,10 @@ export class UsersController {
   }
 
   @Post('create')
-  public async createUsers(
+  public async createUser(
     @Body('userData') userData: CreateRequest,
   ): Promise<UserRecord> {
-    const result = await this.usersService.createUsers(userData);
+    const result = await this.usersService.createUser(userData);
     return result;
   }
 }
