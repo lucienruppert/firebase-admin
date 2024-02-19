@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import * as admin from 'firebase-admin';
 import * as dotenv from 'dotenv';
-import { UserRecord } from 'firebase-admin/lib/auth/user-record';
 import { GetUsersResult } from 'firebase-admin/lib/auth/base-auth';
 import { UserIdentifier } from 'firebase-admin/lib/auth/identifier';
 
@@ -19,17 +18,6 @@ export class UsersService {
       }),
     } as admin.ServiceAccount);
     this.firebase = admin.app();
-  }
-
-  public async getUserByEmail(email: string): Promise<UserRecord> {
-    try {
-      const userData: UserRecord = await this.firebase
-        .auth()
-        .getUserByEmail(email);
-      return userData;
-    } catch (error) {
-      throw new Error('Failed to retrieve users: ' + error);
-    }
   }
 
   public async getUsersByEmail(
