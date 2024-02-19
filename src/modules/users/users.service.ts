@@ -1,4 +1,4 @@
-import { Injectable, Module } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import * as admin from 'firebase-admin';
 import * as dotenv from 'dotenv';
 import { UserRecord } from 'firebase-admin/lib/auth/user-record';
@@ -57,9 +57,3 @@ export class UsersService {
     }
   }
 }
-
-@Module({
-  providers: [UsersService],
-  exports: [UsersService],
-})
-export class UsersModule {}
