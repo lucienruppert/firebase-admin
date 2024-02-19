@@ -1,22 +1,13 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { UserRecord } from 'firebase-admin/lib/auth/user-record';
 import { GetUsersResult } from 'firebase-admin/lib/auth/base-auth';
 import { UserIdentifier } from 'firebase-admin/lib/auth/identifier';
 
-@Controller('users')
+@Controller()
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
-  @Post('single')
-  public async getUserByEmail(
-    @Body('email') email: string,
-  ): Promise<UserRecord> {
-    const result = await this.usersService.getUserByEmail(email);
-    return result;
-  }
-
-  @Post('multiple')
+  @Post('users')
   public async getUsersByEmail(
     @Body('emails') userEmails: Array<UserIdentifier>,
   ): Promise<GetUsersResult> {
