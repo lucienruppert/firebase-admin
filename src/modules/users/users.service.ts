@@ -62,4 +62,4 @@ export class UsersService {
   providers: [UsersService],
   exports: [UsersService],
 })
-export class FirebaseModule {}
+export class UsersModule {}
