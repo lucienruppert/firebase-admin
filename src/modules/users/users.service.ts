@@ -3,6 +3,8 @@ import * as admin from 'firebase-admin';
 import * as dotenv from 'dotenv';
 import { GetUsersResult } from 'firebase-admin/lib/auth/base-auth';
 import { UserIdentifier } from 'firebase-admin/lib/auth/identifier';
+import { UserRecord } from 'firebase-admin/lib/auth/user-record';
+import { CreateRequest } from 'firebase-admin/lib/auth/auth-config';
 
 @Injectable()
 export class UsersService {
@@ -29,7 +31,16 @@ export class UsersService {
         .getUsers(userEmails);
       return usersData;
     } catch (error) {
-      throw new Error('Failed to retrieve users data: ' + error);
+      throw new Error('Failed to retrieve users data with error: ' + error);
+    }
+  }
+
+  public async createUsers(userData: CreateRequest): Promise<UserRecord> {
+    try {
+      const userRecords = await this.firebase.auth().createUser(userData);
+      return userRecords;
+    } catch (error) {
+      throw new Error('Failed to create users with error: ' + error);
     }
   }
 }
