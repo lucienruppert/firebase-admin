@@ -9,19 +9,24 @@ export class UsersController {
   constructor(private usersService: UsersService) {}
 
   @Get()
-  public getUserEmails(): Promise<string[]> {
-    return this.usersService.getUserEmails();
+  public async getUserEmails(): Promise<string[]> {
+    const result = await this.usersService.getUserEmails();
+    return result;
   }
 
   @Post('single')
-  public getUserByEmail(@Body('email') email: string): Promise<UserRecord> {
-    return this.usersService.getUserByEmail(email);
+  public async getUserByEmail(
+    @Body('email') email: string,
+  ): Promise<UserRecord> {
+    const result = await this.usersService.getUserByEmail(email);
+    return result;
   }
 
   @Post('multiple')
-  public getUsersByEmail(
+  public async getUsersByEmail(
     @Body('emails') userEmails: Array<UserIdentifier>,
   ): Promise<GetUsersResult> {
-    return this.usersService.getUsersByEmail(userEmails);
+    const result = await this.usersService.getUsersByEmail(userEmails);
+    return result;
   }
 }
