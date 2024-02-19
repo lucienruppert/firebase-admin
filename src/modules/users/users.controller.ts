@@ -3,11 +3,11 @@ import { UsersService } from './users.service';
 import { GetUsersResult } from 'firebase-admin/lib/auth/base-auth';
 import { UserIdentifier } from 'firebase-admin/lib/auth/identifier';
 
-@Controller()
+@Controller('users')
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
-  @Post('users')
+  @Post('list')
   public async getUsersByEmail(
     @Body('emails') userEmails: Array<UserIdentifier>,
   ): Promise<GetUsersResult> {
