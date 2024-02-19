@@ -8,7 +8,7 @@ import { UserIdentifier } from 'firebase-admin/lib/auth/identifier';
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
-  @Post('single')
+  @Post('one')
   public async getUserByEmail(
     @Body('email') email: string,
   ): Promise<UserRecord> {
