@@ -21,6 +21,18 @@ export class UsersService {
     this.firebase = admin.app();
   }
 
+  public async getUserEmails(): Promise<string[]> {
+    try {
+      const userData = await this.firebase.auth().listUsers();
+      const userArray = userData.users;
+      // At the moment only email-password based registration is used
+      const users = userArray.map((user) => user.email!);
+      return users;
+    } catch (error) {
+      throw new Error('Failed to retrieve users: ' + error);
+    }
+  }
+
   public async getUserByEmail(email: string): Promise<UserRecord> {
     try {
       const userData: UserRecord = await this.firebase
