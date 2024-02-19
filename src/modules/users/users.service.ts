@@ -3,7 +3,6 @@ import * as admin from 'firebase-admin';
 import * as dotenv from 'dotenv';
 import { GetUsersResult } from 'firebase-admin/lib/auth/base-auth';
 import { UserIdentifier } from 'firebase-admin/lib/auth/identifier';
-import { UserRecord } from 'firebase-admin/lib/auth/user-record';
 
 @Injectable()
 export class UsersService {
@@ -19,29 +18,6 @@ export class UsersService {
       }),
     } as admin.ServiceAccount);
     this.firebase = admin.app();
-  }
-
-  public async getUserEmails(): Promise<string[]> {
-    try {
-      const userData = await this.firebase.auth().listUsers();
-      const userArray = userData.users;
-      // At the moment only email-password based registration is used
-      const users = userArray.map((user) => user.email!);
-      return users;
-    } catch (error) {
-      throw new Error('Failed to retrieve users: ' + error);
-    }
-  }
-
-  public async getUserByEmail(email: string): Promise<UserRecord> {
-    try {
-      const userData: UserRecord = await this.firebase
-        .auth()
-        .getUserByEmail(email);
-      return userData;
-    } catch (error) {
-      throw new Error('Failed to retrieve users: ' + error);
-    }
   }
 
   public async getUsersByEmail(
