@@ -35,9 +35,9 @@ export class UsersService {
     }
   }
 
-  public async createUser(userData: CreateRequest): Promise<UserRecord> {
+  public async createUser(properties: CreateRequest): Promise<UserRecord> {
     try {
-      const userRecords = await this.firebase.auth().createUser(userData);
+      const userRecords = await this.firebase.auth().createUser(properties);
       return userRecords;
     } catch (error) {
       throw new Error('Failed to create users with error: ' + error);

@@ -24,9 +24,9 @@ export class UsersController {
 
   @Post('create')
   public async createUser(
-    @Body('userData') userData: CreateRequest,
+    @Body('properties') properties: CreateRequest,
   ): Promise<UserRecord> {
-    const result = await this.usersService.createUser(userData);
+    const result = await this.usersService.createUser(properties);
     return result;
   }
 }
