@@ -7,5 +7,6 @@ async function bootstrap(): Promise<void> {
     origin: ['https://tribebuddy.com', 'http://localhost:4200'],
   });
   await app.listen(process.env.PORT || 3000);
+  console.log('here is the variable:', process.env.BLABLA);
 }
 bootstrap();
